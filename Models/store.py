@@ -1,9 +1,16 @@
 from pydantic import BaseModel
+from enum import Enum
+
+class Categoria(Enum):
+    cat1 = 'Alimenticio'
+    cat2 = "Textil"
+
 
 # Model for user credentials
 class Store(BaseModel):
-    username: str
     cnpj: str
+    username: str
     email: str
-    categoria: str
+    categoria: Categoria
     password: str
+
