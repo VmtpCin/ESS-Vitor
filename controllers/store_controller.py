@@ -52,7 +52,7 @@ async def login(cnpj: str, password: str):
     user_data = load_store_data()
 
     if cnpj not in user_data or user_data[cnpj]["password"] != password:
-        raise HTTPException(status_code=401, detail="Invalid username or password")
+        raise HTTPException(status_code=401, detail="Invalid CNPJ or password")
 
     username = user_data[cnpj]["username"]
 
@@ -82,7 +82,7 @@ def change_username(new_username: str, cnpj: str):
     save_store_data(user)
 
 
-
+# Endpoint for password retrieval
 @router.post("/login/retrieve_password")
 async def retrieve_password(cnpj: str, email: str, new_password: str):
 
@@ -102,6 +102,7 @@ def get_current_user(cnpj: str = Cookie(None)):
         return {"message": "user data found"}
 
 
+#Endpoint for account management
 @router.post("/user/change_user_data")
 def change_user_data(cnpj: str,
                             email: str | None,
